@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Contract</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+
+<main class="search-ui">
+
+  <h1 class="search-title">My Learning Contract</h1>
+
+  <nav class="tabs">
+    <button class="tab active" data-term="Expectations">Expectations</button>
+    <button class="tab" data-term="Motivations">Motivations</button>
+    <button class="tab" data-term="Contributions">Contributions</button>
+    <button class="tab" data-term="Hindrances">Hindrances</button>
+  </nav>
+
+  <div class="search-bar">
+    <i class="fa fa-search" style="color: #da9bab;"></i>
+    <span id="search-term">Expectations</span>
+  </div>
+
+  <section class="result-box" id="result-box">
+    <p>
+      I expect to gain a deeper understanding of responsive web design and improve my ability to create visually appealing and accessible web pages.
+    </p>
+  </section>
+
+</main>
+
+
+
+<footer>
+  <p>Submitted by: Princess Del Rosario</p>
+</footer>
+<script>
+  const tabs = document.querySelectorAll(".tab");
+  const searchTerm = document.getElementById("search-term");
+  const resultBox = document.getElementById("result-box");
+
+  const content = {
+    Expectations: "I expect to gain a deeper understanding of responsive web design and improve my ability to create visually appealing and accessible web pages.",
+    Motivations: "I am motivated by my passion for design and my desire to develop skills that support my academic and career goals.",
+    Contributions: "I will actively participate in learning activities, complete tasks on time, and practice consistently to enhance my skills.",
+    Hindrances: "Possible hindrances include limited time and technical challenges, which I will manage through proper planning and perseverance."
+  };
+
+  function typeText(element, text) {
+    element.textContent = "";
+    let i = 0;
+
+    const typing = setInterval(() => {
+      element.textContent += text.charAt(i);
+      i++;
+      if (i === text.length) clearInterval(typing);
+    }, 40);
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      const term = tab.dataset.term;
+
+      // typing effect
+      typeText(searchTerm, term);
+
+      // animate result box
+      resultBox.classList.remove("animate");
+      void resultBox.offsetWidth; // reset animation
+      resultBox.classList.add("animate");
+
+      resultBox.innerHTML = `<p>${content[term]}</p>`;
+    });
+  });
+</script>
+
+</body>
+</html>
